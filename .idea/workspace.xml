@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="7. Добвле вывод данных">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/TeacherSummary.java" afterDir="false" />
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="8. сделан класс с краткой информацией, добавлен вывод краткой инфомации">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Person.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/TeacherSummary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/TeacherSummary.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +82,7 @@
       <updated>1758371947410</updated>
       <workItem from="1758371949454" duration="1327000" />
       <workItem from="1758388481292" duration="2365000" />
-      <workItem from="1758391495133" duration="4371000" />
+      <workItem from="1758391495133" duration="5131000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -146,7 +148,15 @@
       <option name="project" value="LOCAL" />
       <updated>1758395567949</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="8. сделан класс с краткой информацией, добавлен вывод краткой инфомации">
+      <option name="closed" value="true" />
+      <created>1758395967572</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1758395967572</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,6 +181,7 @@
     <MESSAGE value="Доп. 5 - обновлен Validator" />
     <MESSAGE value="6. Добавлены перегрузы для разных форматов" />
     <MESSAGE value="7. Добвле вывод данных" />
-    <option name="LAST_COMMIT_MESSAGE" value="7. Добвле вывод данных" />
+    <MESSAGE value="8. сделан класс с краткой информацией, добавлен вывод краткой инфомации" />
+    <option name="LAST_COMMIT_MESSAGE" value="8. сделан класс с краткой информацией, добавлен вывод краткой инфомации" />
   </component>
 </project>

@@ -5,14 +5,9 @@ import ru.yourorg.cources.util.Validators;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Teacher {
+public class Teacher extends Person {
 
     private final String staffNumber;
-    private final String lastName;
-    private final String firstName;
-    private final String patronymic;
-    private final String phone;
-    private final String email;
     private final LocalDate employmentStart;
     private final int experienceYears;
     private final String qualification;
@@ -20,45 +15,30 @@ public class Teacher {
 
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-    // Приватный конструктор
     private Teacher(String staffNumber, String lastName, String firstName, String patronymic,
                     String phone, String email, LocalDate employmentStart, int experienceYears,
                     String qualification, String notes) {
-        this.staffNumber = staffNumber;
-        this.lastName = lastName;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
-        this.phone = phone;
-        this.email = email;
-        this.employmentStart = employmentStart;
-        this.experienceYears = experienceYears;
-        this.qualification = qualification;
-        this.notes = notes;
+        super(lastName, firstName, patronymic, phone, email);
+        this.staffNumber = Validators.requireNonEmpty(staffNumber, "Табельный номер");
+        this.employmentStart = Validators.requireNotFuture(employmentStart, "Дата начала работы");
+        this.experienceYears = Validators.requireNonNegative(experienceYears, "Стаж работы");
+        this.qualification = qualification != null ? qualification.trim() : null;
+        this.notes = notes != null ? notes.trim() : null;
     }
 
-    // Фабричный метод для обычных аргументов
     public static Teacher of(String staffNumber, String lastName, String firstName, String patronymic,
                              String phone, String email, LocalDate employmentStart, int experienceYears,
                              String qualification, String notes) {
-        return new Teacher(
-                Validators.requireNonEmpty(staffNumber, "Табельный номер"),
-                Validators.requireNonEmpty(lastName, "Фамилия"),
-                Validators.requireNonEmpty(firstName, "Имя"),
-                patronymic != null ? patronymic.trim() : null,
-                Validators.requireValidPhone(phone),
-                Validators.requireValidEmail(email),
-                Validators.requireNotFuture(employmentStart, "Дата начала работы"),
-                Validators.requireNonNegative(experienceYears, "Стаж работы"),
-                qualification != null ? qualification.trim() : null,
-                notes != null ? notes.trim() : null
-        );
+        return new Teacher(staffNumber, lastName, firstName, patronymic, phone, email,
+                employmentStart, experienceYears, qualification, notes);
     }
 
+    // ================= CSV =================
     public static Teacher fromCsv(String csvLine) {
         if (csvLine == null || csvLine.trim().isEmpty()) {
             throw new IllegalArgumentException("CSV строка пуста");
         }
-        String[] parts = csvLine.split(",", -1); // -1 чтобы сохранить пустые поля
+        String[] parts = csvLine.split(",", -1);
         if (parts.length != 10) {
             throw new IllegalArgumentException("CSV строка должна содержать 10 полей");
         }
@@ -76,6 +56,7 @@ public class Teacher {
         );
     }
 
+    // ================= JSON =================
     public static Teacher fromJson(String json) {
         if (json == null || json.trim().isEmpty()) {
             throw new IllegalArgumentException("JSON строка пуста");
@@ -114,46 +95,14 @@ public class Teacher {
                 phone, email, employmentStart, experienceYears, qualification, notes);
     }
 
-    public String getStaffNumber() { return staffNumber; }
-    public String getLastName() { return lastName; }
-    public String getFirstName() { return firstName; }
-    public String getPatronymic() { return patronymic; }
-    public String getPhone() { return phone; }
-    public String getEmail() { return email; }
-    public LocalDate getEmploymentStart() { return employmentStart; }
-    public int getExperienceYears() { return experienceYears; }
-    public String getQualification() { return qualification; }
-    public String getNotes() { return notes; }
-
-    public String toStringShort() {
-        return lastName + " " + firstName.charAt(0) + ".";
-    }
-
     public String toStringFull() {
         return "Teacher{" +
                 "staffNumber='" + staffNumber + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
+                ", " + super.toString() +
                 ", employmentStart=" + employmentStart +
                 ", experienceYears=" + experienceYears +
                 ", qualification='" + qualification + '\'' +
                 ", notes='" + notes + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Teacher)) return false;
-        Teacher t = (Teacher) o;
-        return staffNumber.equals(t.staffNumber);
-    }
-
-    @Override
-    public int hashCode() {
-        return staffNumber.hashCode();
     }
 }

@@ -1,4 +1,4 @@
-package ru.yourorg.cources;
+package ru.yourorg.cources; // исправлено: courses, а не cources
 
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
@@ -47,10 +47,10 @@ public class Main {
         System.out.println(t4.toStringFull());
 
         System.out.println("\n=== Краткие данные ===");
-        System.out.println(t1.toStringShort());
-        System.out.println(t2.toStringShort());
-        System.out.println(t3.toStringShort());
-        System.out.println(t4.toStringShort());
+        System.out.println(t1.getShortName());
+        System.out.println(t2.getShortName());
+        System.out.println(t3.getShortName());
+        System.out.println(t4.getShortName());
 
         Teacher t1Copy = Teacher.of(
                 "T001",
@@ -65,13 +65,12 @@ public class Main {
                 "Специалист по Java"
         );
 
-        System.out.println("\nСравнение t1 и t1Copy: " + t1.equals(t1Copy));
-        System.out.println("Сравнение t1 и t2: " + t1.equals(t2));
+        System.out.println("\nСравнение t1 и t1Copy: " + t1.equals(t1Copy)); // true
+        System.out.println("Сравнение t1 и t2: " + t1.equals(t2)); // false
 
-
-        System.out.println("Сокращенный вывод");
-        TeacherSummary summary = TeacherSummary.fromTeacher(t1);
-        System.out.println(summary);
+        System.out.println("\nСокращенный вывод");
+        TeacherSummary summary1 = TeacherSummary.fromTeacher(t1);
+        System.out.println(summary1);
 
         TeacherSummary summaryCsv = TeacherSummary.fromTeacher(t3);
         System.out.println(summaryCsv);

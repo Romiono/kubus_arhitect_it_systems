@@ -1,6 +1,7 @@
 package ru.yourorg.cources;
 
 import ru.yourorg.cources.model.Teacher;
+import ru.yourorg.cources.model.TeacherSummary;
 
 import java.time.LocalDate;
 
@@ -66,5 +67,13 @@ public class Main {
 
         System.out.println("\nСравнение t1 и t1Copy: " + t1.equals(t1Copy));
         System.out.println("Сравнение t1 и t2: " + t1.equals(t2));
+
+
+        System.out.println("Сокращенный вывод");
+        TeacherSummary summary = TeacherSummary.fromTeacher(t1);
+        System.out.println(summary);
+
+        TeacherSummary summaryCsv = TeacherSummary.fromTeacher(t3);
+        System.out.println(summaryCsv);
     }
 }

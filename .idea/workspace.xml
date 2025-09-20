@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="3. Описан класс Teacher">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="Доп. 5 - обновлен Validator">
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,7 +77,7 @@
       <updated>1758371947410</updated>
       <workItem from="1758371949454" duration="1327000" />
       <workItem from="1758388481292" duration="2365000" />
-      <workItem from="1758391495133" duration="2738000" />
+      <workItem from="1758391495133" duration="3041000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -112,7 +111,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758393661749</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="5. Повторов кода не обнаружено, добавлена фабрика создания Teacher с валидацией">
+      <option name="closed" value="true" />
+      <created>1758394378128</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1758394378128</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Доп. 5 - обновлен Validator">
+      <option name="closed" value="true" />
+      <created>1758394405504</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1758394405504</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +148,8 @@
     <MESSAGE value="init project" />
     <MESSAGE value="2. Выбрана сущность Teacher" />
     <MESSAGE value="3. Описан класс Teacher" />
-    <option name="LAST_COMMIT_MESSAGE" value="3. Описан класс Teacher" />
+    <MESSAGE value="5. Повторов кода не обнаружено, добавлена фабрика создания Teacher с валидацией" />
+    <MESSAGE value="Доп. 5 - обновлен Validator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Доп. 5 - обновлен Validator" />
   </component>
 </project>

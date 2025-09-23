@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="9 - дополнение">
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/Untitled diagram _ Mermaid Chart-2025-09-20-193446.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/database.png" afterDir="false" />
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="апдейт для public и readme">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/courses-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/courses-1.0-SNAPSHOT.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
@@ -97,7 +94,7 @@
       <workItem from="1758388481292" duration="2365000" />
       <workItem from="1758391495133" duration="6942000" />
       <workItem from="1758626595673" duration="997000" />
-      <workItem from="1758627628779" duration="1381000" />
+      <workItem from="1758627628779" duration="1822000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -187,7 +184,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758396786524</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="добавлен .gitignore">
+      <option name="closed" value="true" />
+      <created>1758629159112</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1758629159112</updated>
+    </task>
+    <task id="LOCAL-00013" summary="апдейт для public и readme">
+      <option name="closed" value="true" />
+      <created>1758629277705</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1758629277705</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,6 +228,9 @@
     <MESSAGE value="8. сделан класс с краткой информацией, добавлен вывод краткой инфомации" />
     <MESSAGE value="9. Для уборки дубликатов часть данных вынесена в отдельный класс" />
     <MESSAGE value="9 - дополнение" />
-    <option name="LAST_COMMIT_MESSAGE" value="9 - дополнение" />
+    <MESSAGE value="Обновление maven под сборку, readme, добавлены диаграммы в public" />
+    <MESSAGE value="добавлен .gitignore" />
+    <MESSAGE value="апдейт для public и readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="апдейт для public и readme" />
   </component>
 </project>

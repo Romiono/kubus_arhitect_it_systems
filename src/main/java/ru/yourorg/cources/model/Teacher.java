@@ -105,4 +105,4 @@ public class Teacher extends Person {
                 ", notes='" + notes + '\'' +
                 '}';
     }
-}
+};

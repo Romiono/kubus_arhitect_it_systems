@@ -35,4 +35,13 @@ public abstract class Person {
     public String toString() {
         return getShortName() + " | " + phone + " | " + email;
     }
+
+    @Override
+    public boolean equals(Object teacherObj) {
+        Teacher teacher = (Teacher) teacherObj;
+        if (teacher.getEmail() == this.getEmail() && teacher.getPhone() == this.getPhone()) {
+            return true;
+        }
+        return false;
+    }
 }

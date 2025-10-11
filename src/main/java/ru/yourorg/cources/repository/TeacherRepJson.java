@@ -2,23 +2,31 @@ package ru.yourorg.cources.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
+import ru.yourorg.cources.util.JacksonObjectMapperProvider;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class TeacherRepJson extends TeacherRepository {
 
   private final File file;
-  private final ObjectMapper objectMapper = new ObjectMapper();
+  private final ObjectMapper objectMapper;
   private List<Teacher> teachers = new ArrayList<>();
 
   public TeacherRepJson(String filePath) {
     this.file = new File(filePath);
-    readAll(); // загрузка данных при создании
+    this.objectMapper = JacksonObjectMapperProvider.getMapper();;
+    this.objectMapper.registerModule(new JavaTimeModule());
+    this.objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
+    readAll(); // Загрузка при создании
   }
 
   // a. Чтение всех значений из файла
@@ -44,6 +52,7 @@ public class TeacherRepJson extends TeacherRepository {
   }
 
   // c. Получить объект по ID
+  @Override
   public Teacher getById(String id) {
     return teachers.stream()
       .filter(t -> t.getStaffNumber().equals(id))
@@ -51,12 +60,31 @@ public class TeacherRepJson extends TeacherRepository {
       .orElse(null);
   }
 
+  // d. Получить краткий список с фильтром и сортировкой
   @Override
   public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
-    return List.of();
+    Stream<Teacher> stream = teachers.stream();
+
+    if (filter != null) {
+      stream = stream.filter(filter::apply);
+    }
+
+    if (sortOrder != null) {
+      Comparator<Teacher> comparator = sortOrder.getComparator();
+      if (comparator != null) {
+        stream = stream.sorted(comparator);
+      }
+    }
+
+    return stream
+      .skip((long) (n - 1) * k)
+      .limit(k)
+      .map(TeacherSummary::fromTeacher)
+      .collect(Collectors.toList());
   }
 
-  // d. Получить список k по счету n объектов краткой версии
+  // e. Получить краткий список без фильтра
+  @Override
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
     return teachers.stream()
       .skip((long) (n - 1) * k)
@@ -65,12 +93,14 @@ public class TeacherRepJson extends TeacherRepository {
       .collect(Collectors.toList());
   }
 
-  // e. Сортировка по полю стажа
+  // f. Сортировка по стажу (по возрастанию)
+  @Override
   public void sortByExperienceYears() {
     teachers.sort(Comparator.comparingInt(Teacher::getExperienceYears));
   }
 
-  // f. Добавить объект в список (генерация нового ID)
+  // g. Добавить преподавателя (с генерацией нового ID)
+  @Override
   public void add(Teacher teacher) {
     String newId = generateNewId();
     Teacher newTeacher = Teacher.of(
@@ -99,7 +129,8 @@ public class TeacherRepJson extends TeacherRepository {
     return "T" + String.format("%03d", maxId + 1);
   }
 
-  // g. Заменить элемент по ID
+  // h. Обновить преподавателя по ID
+  @Override
   public boolean updateById(String id, Teacher updated) {
     for (int i = 0; i < teachers.size(); i++) {
       if (teachers.get(i).getStaffNumber().equals(id)) {
@@ -123,26 +154,32 @@ public class TeacherRepJson extends TeacherRepository {
     return false;
   }
 
-  // h. Удалить элемент по ID
+  // i. Удалить по ID
+  @Override
   public boolean deleteById(String id) {
     boolean removed = teachers.removeIf(t -> t.getStaffNumber().equals(id));
-    if (removed) writeAll();
+    if (removed) {
+      writeAll();
+    }
     return removed;
   }
 
+  // j. Кол-во по фильтру
   @Override
   public int getCount(Filter filter) {
-    return 0;
+    if (filter == null) return teachers.size();
+    return (int) teachers.stream().filter(filter::apply).count();
   }
 
-  // i. Получить количество элементов
+  // k. Общее кол-во
+  @Override
   public int getCount() {
     return teachers.size();
   }
 
+  // l. Получить всех преподавателей
   @Override
   public List<Teacher> getAllTeachers() {
-    return new ArrayList<>(teachers); // можно вернуть ImmutableList если хочешь защиту от изменений
+    return new ArrayList<>(teachers);
   }
-
 }

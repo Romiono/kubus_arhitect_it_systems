@@ -8,9 +8,9 @@ public class DBManager {
   private static DBManager instance;
   private Connection connection;
 
-  private static final String URL = "jdbc:postgresql://localhost:5432/courses";
-  private static final String USER = "postgres";
-  private static final String PASSWORD = "admin"; // замени на свой пароль
+  private static final String URL = "jdbc:postgresql://localhost:5432/OOP";
+  private static final String USER = "romashka";
+  private static final String PASSWORD = "1234"; // замени на свой пароль
 
   private DBManager() {
     try {

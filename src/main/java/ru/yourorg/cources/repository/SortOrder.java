@@ -1,18 +1,35 @@
 package ru.yourorg.cources.repository;
 
+import ru.yourorg.cources.model.Teacher;
+
+import java.util.Comparator;
+
 public enum SortOrder {
-  BY_EXPERIENCE_DESC("experience_years DESC"),
-  BY_EXPERIENCE_ASC("experience_years ASC"),
-  BY_LAST_NAME_ASC("last_name ASC"),
-  BY_LAST_NAME_DESC("last_name DESC");
+  BY_LASTNAME_ASC {
+    @Override
+    public String getSqlOrder() {
+      return "last_name ASC";
+    }
 
-  private final String sqlOrder;
+    @Override
+    public Comparator<Teacher> getComparator() {
+      return Comparator.comparing(Teacher::getLastName);
+    }
+  },
 
-  SortOrder(String sqlOrder) {
-    this.sqlOrder = sqlOrder;
-  }
+  BY_EXPERIENCE_DESC {
+    @Override
+    public String getSqlOrder() {
+      return "experience_years DESC";
+    }
 
-  public String getSqlOrder() {
-    return sqlOrder;
-  }
+    @Override
+    public Comparator<Teacher> getComparator() {
+      return Comparator.comparingInt(Teacher::getExperienceYears).reversed();
+    }
+  };
+
+  public abstract String getSqlOrder();
+
+  public abstract Comparator<Teacher> getComparator(); // 🔧 Добавь это
 }

@@ -32,6 +32,12 @@
         <artifactId>postgresql</artifactId>
         <version>42.7.3</version>
       </dependency>
+
+      <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>2.17.0</version> <!-- или другую версию, соответствующую твоему jackson-core -->
+      </dependency>
     </dependencies>
 
 
@@ -64,6 +70,18 @@
             </archive>
         </configuration>
     </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>3.1.2</version>
+        <dependencies>
+          <dependency>
+            <groupId>com.puppycrawl.tools</groupId>
+            <artifactId>checkstyle</artifactId>
+            <version>9.3</version> <!-- версия должна быть >= 8.24 -->
+          </dependency>
+        </dependencies>
+      </plugin>
     </plugins>
     </build>
 </project>

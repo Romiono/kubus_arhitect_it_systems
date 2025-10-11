@@ -73,4 +73,9 @@ public class TeacherRepositoryDecorator extends TeacherRepository {
   public int getCount() {
     return 0;
   }
+
+  @Override
+  public List<Teacher> getAllTeachers() {
+    return List.of();
+  }
 }

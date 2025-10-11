@@ -1,5 +1,7 @@
 package ru.yourorg.cources.repository;
 
+import ru.yourorg.cources.model.Teacher;
+
 import java.util.List;
 
 public class QualificationFilter implements Filter {
@@ -18,5 +20,10 @@ public class QualificationFilter implements Filter {
   @Override
   public List<Object> getParameters() {
     return List.of(qualification);
+  }
+
+  @Override
+  public boolean apply(Teacher teacher) {
+    return false;
   }
 }

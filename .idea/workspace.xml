@@ -4,12 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="апдейт для public и readme">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepJson.java" afterDir="false" />
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="лаба 2 - пункт 8">
+      <change afterPath="$PROJECT_DIR$/google_checks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/util/JacksonObjectMapperProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/Filter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/QualificationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/QualificationFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/SortOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/SortOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepYaml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepositoryDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepositoryDecorator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,12 +46,12 @@
     &quot;assignee&quot;: &quot;Romiono&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/Romiono/kubus_arhitect_it_systems.git&quot;,
-    &quot;accountId&quot;: &quot;ca72c1b6-2659-4df7-ae94-0ae2bc6d987d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Romiono/kubus_arhitect_it_systems.git",
+    "accountId": "b1f3719f-761e-451c-ade5-1909dd6b12b1"
   }
-}</component>
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -79,6 +88,8 @@
       <recent name="C:\Users\mrfre\WebstormProjects\kubus_arhitect_it_systems\src\public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src" />
       <recent name="C:\Users\mrfre\WebstormProjects\kubus_arhitect_it_systems" />
     </key>
   </component>
@@ -108,7 +119,7 @@
       <workItem from="1760158854737" duration="70000" />
       <workItem from="1760158932057" duration="2283000" />
       <workItem from="1760179900775" duration="18000" />
-      <workItem from="1760183362868" duration="4737000" />
+      <workItem from="1760183362868" duration="15744000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -214,7 +225,71 @@
       <option name="project" value="LOCAL" />
       <updated>1758629277705</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="лаба 2 - пункт 1">
+      <option name="closed" value="true" />
+      <created>1760190598179</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1760190598179</updated>
+    </task>
+    <task id="LOCAL-00015" summary="лаба 2 - пункт 2">
+      <option name="closed" value="true" />
+      <created>1760194123347</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1760194123347</updated>
+    </task>
+    <task id="LOCAL-00016" summary="лаба 2 - пункт 3">
+      <option name="closed" value="true" />
+      <created>1760194899758</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1760194899758</updated>
+    </task>
+    <task id="LOCAL-00017" summary="лаба 2 - пункт 4">
+      <option name="closed" value="true" />
+      <created>1760206535039</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1760206535039</updated>
+    </task>
+    <task id="LOCAL-00018" summary="лаба 2 - пункт 5">
+      <option name="closed" value="true" />
+      <created>1760207069316</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1760207069316</updated>
+    </task>
+    <task id="LOCAL-00019" summary="лаба 2 - пункт 6">
+      <option name="closed" value="true" />
+      <created>1760207881916</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1760207881916</updated>
+    </task>
+    <task id="LOCAL-00020" summary="лаба 2 - пункт 7">
+      <option name="closed" value="true" />
+      <created>1760209300067</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1760209300067</updated>
+    </task>
+    <task id="LOCAL-00021" summary="лаба 2 - пункт 8">
+      <option name="closed" value="true" />
+      <created>1760210853641</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1760210853641</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -245,6 +320,14 @@
     <MESSAGE value="Обновление maven под сборку, readme, добавлены диаграммы в public" />
     <MESSAGE value="добавлен .gitignore" />
     <MESSAGE value="апдейт для public и readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="апдейт для public и readme" />
+    <MESSAGE value="лаба 2 - пункт 1" />
+    <MESSAGE value="лаба 2 - пункт 2" />
+    <MESSAGE value="лаба 2 - пункт 3" />
+    <MESSAGE value="лаба 2 - пункт 4" />
+    <MESSAGE value="лаба 2 - пункт 5" />
+    <MESSAGE value="лаба 2 - пункт 6" />
+    <MESSAGE value="лаба 2 - пункт 7" />
+    <MESSAGE value="лаба 2 - пункт 8" />
+    <option name="LAST_COMMIT_MESSAGE" value="лаба 2 - пункт 8" />
   </component>
 </project>

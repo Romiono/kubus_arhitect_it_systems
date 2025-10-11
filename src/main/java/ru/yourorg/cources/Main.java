@@ -1,105 +1,96 @@
 package ru.yourorg.cources;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
-import ru.yourorg.cources.repository.*;
+import ru.yourorg.cources.repository.Filter;
+import ru.yourorg.cources.repository.SortOrder;
+import ru.yourorg.cources.repository.TeacherRepository;
+import ru.yourorg.cources.repository.TeacherRepDB;
+import ru.yourorg.cources.repository.TeacherRepositoryDecorator;
+import ru.yourorg.cources.repository.QualificationFilter;
+import ru.yourorg.cources.repository.TeacherRepJson;
 import ru.yourorg.cources.repository.decorators.TeacherFilter;
 import ru.yourorg.cources.repository.decorators.TeacherRepJsonFilteredSortedDecorator;
 import ru.yourorg.cources.repository.decorators.TeacherSorter;
+import ru.yourorg.cources.util.JacksonObjectMapperProvider;
 
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
+  public static void main(String[] args) throws JsonProcessingException {
+    System.out.println("==== Демонстрация системы учета преподавателей ====");
 
-        Teacher t1 = Teacher.of(
-                "T001",
-                "Иванов",
-                "Алексей",
-                "Петрович",
-                "+79160000001",
-                "a.ivanov@example.com",
-                LocalDate.of(2010, 9, 1),
-                15,
-                "Кандидат наук, доцент",
-                "Специалист по Java"
-        );
+    // 1. Работа с моделью Teacher
+    Teacher teacher1 = Teacher.of(
+      "T001", "Иванов", "Алексей", "Петрович",
+      "+79160000001", "ivanov@example.com",
+      LocalDate.of(2010, 9, 1),
+      14, "Профессор", "Эксперт по Java"
+    );
 
-        Teacher t2 = Teacher.of(
-                "T002",
-                "Смирнова",
-                "Елена",
-                "Игоревна",
-                "+79160000002",
-                "e.smirnova@example.com",
-                LocalDate.of(2015, 3, 15),
-                10,
-                "Старший преподаватель",
-                "Практик по менеджменту"
-        );
+    String csv = "T002,Сидорова,Марина,Владимировна,+79160000002,msidorova@example.com,2015-01-01,9,Доцент,Специалист по UX";
+    Teacher teacher2 = Teacher.fromCsv(csv);
 
-        String csv = "T003,Петров,Дмитрий,Александрович,+79160000003,d.petrov@example.com,2005-01-10,20,Профессор,Автор курсов";
-        Teacher t3 = Teacher.fromCsv(csv);
+    String json = "{\"staffNumber\":\"T003\",\"lastName\":\"Кузнецов\",\"firstName\":\"Дмитрий\",\"patronymic\":\"Игоревич\",\"phone\":\"+79160000003\",\"email\":\"d.kuznecov@example.com\",\"employmentStart\":\"2018-02-14\",\"experienceYears\":6,\"qualification\":\"Преподаватель\",\"notes\":\"Фронтенд\"}";
+    ObjectMapper mapper = JacksonObjectMapperProvider.getMapper();
+    Teacher teacher3 = mapper.readValue(json, Teacher.class);
 
-        String json = "{\"staffNumber\":\"T004\",\"lastName\":\"Кузнецова\",\"firstName\":\"Мария\",\"patronymic\":\"Владимировна\",\"phone\":\"+79160000004\",\"email\":\"m.kuznetsova@example.com\",\"employmentStart\":\"2018-08-20\",\"experienceYears\":7,\"qualification\":\"Преподаватель\",\"notes\":\"Спец по коммуникациям\"}";
-        Teacher t4 = Teacher.fromJson(json);
+    System.out.println("\n-- Полные данные преподавателей --");
+    System.out.println(teacher1.toStringFull());
+    System.out.println(teacher2.toStringFull());
+    System.out.println(teacher3.toStringFull());
 
-        System.out.println("=== Полные данные ===");
-        System.out.println(t1.toStringFull());
-        System.out.println(t2.toStringFull());
-        System.out.println(t3.toStringFull());
-        System.out.println(t4.toStringFull());
+    System.out.println("\n-- Сравнение объектов --");
+    Teacher teacher1Copy = Teacher.of(
+      "T001", "Иванов", "Алексей", "Петрович",
+      "+79160000001", "ivanov@example.com",
+      LocalDate.of(2010, 9, 1),
+      14, "Профессор", "Эксперт по Java"
+    );
+    System.out.println("teacher1.equals(teacher1Copy): " + teacher1.equals(teacher1Copy)); // true
 
-        System.out.println("\n=== Краткие данные ===");
-        System.out.println(t1.getShortName());
-        System.out.println(t2.getShortName());
-        System.out.println(t3.getShortName());
-        System.out.println(t4.getShortName());
+    // 2. Работа с базой данных через TeacherRepDB + декоратор
+    TeacherRepository dbBaseRepo = new TeacherRepDB();
+    TeacherRepository dbRepo = new TeacherRepositoryDecorator(dbBaseRepo);
 
-        Teacher t1Copy = Teacher.of(
-                "T001",
-                "Иванов",
-                "Алексей",
-                "Петрович",
-                "+79160000001",
-                "a.ivanov@example.com",
-                LocalDate.of(2010, 9, 1),
-                15,
-                "Кандидат наук, доцент",
-                "Специалист по Java"
-        );
+    // 3. Добавление преподавателя в базу
+    dbRepo.add(teacher1);
 
-        System.out.println("\nСравнение t1 и t1Copy: " + t1.equals(t1Copy)); // true
-        System.out.println("Сравнение t1 и t2: " + t1.equals(t2)); // false
+    // 4. Получение преподавателя по ID
+    System.out.println("\n-- Преподаватель с ID T001 --");
+    Teacher found = dbRepo.getById("T001");
+    System.out.println(found);
 
-        System.out.println("\nСокращенный вывод");
-        TeacherSummary summary1 = TeacherSummary.fromTeacher(t1);
-        System.out.println(summary1);
+    // 5. Использование фильтра и сортировки с помощью декоратора
+    Filter filter = new QualificationFilter("Профессор");
+    SortOrder sortOrder = SortOrder.BY_EXPERIENCE_DESC;
 
-        TeacherSummary summaryCsv = TeacherSummary.fromTeacher(t3);
-        System.out.println(summaryCsv);
+    List<TeacherSummary> filteredList = dbRepo.get_k_n_short_list(filter, sortOrder, 10, 1);
+    int filteredCount = dbRepo.getCount(filter);
 
-      TeacherRepository baseRepo = new TeacherRepDB();
-      TeacherRepository repo = new TeacherRepositoryDecorator(baseRepo);
+    System.out.println("\n-- Фильтрованные и отсортированные преподаватели из БД --");
+    filteredList.forEach(System.out::println);
+    System.out.println("Всего найдено: " + filteredCount);
 
-      Filter filter = new QualificationFilter("PhD");
-      SortOrder sortOrder = SortOrder.BY_EXPERIENCE_DESC;
+    // 6. Работа с JSON файлом + декоратор
+    TeacherRepository jsonRepo = new TeacherRepJson("teachers.json");
+    jsonRepo.add(teacher2);
+    jsonRepo.add(teacher3);
 
-      List<TeacherSummary> list = repo.get_k_n_short_list(filter, sortOrder, 10, 1);
-      int count = repo.getCount(filter);
+    TeacherFilter fileFilter = teacher -> teacher.getExperienceYears() >= 5;
+    TeacherSorter fileSorter = () -> Comparator.comparing(Teacher::getLastName);
 
-      TeacherRepository jsonRepo = new TeacherRepJson("teachers.json");
+    TeacherRepository jsonDecorated = new TeacherRepJsonFilteredSortedDecorator(jsonRepo, fileFilter, fileSorter);
 
-      TeacherFilter teacherFilter = teacher -> teacher.getExperienceYears() >= 5;
-      TeacherSorter sorter = () -> Comparator.comparing(Teacher::getLastName);
+    List<TeacherSummary> pageFromFile = jsonDecorated.get_k_n_short_list(10, 1);
+    int countFromFile = jsonDecorated.getCount();
 
-      TeacherRepository filteredSortedRepo = new TeacherRepJsonFilteredSortedDecorator(jsonRepo, teacherFilter, sorter);
-
-      List<TeacherSummary> page = filteredSortedRepo.get_k_n_short_list(10, 1);
-
-      // int count = filteredSortedRepo.getCount();
-
-    }
+    System.out.println("\n-- Преподаватели из JSON-файла (отфильтровано и отсортировано) --");
+    pageFromFile.forEach(System.out::println);
+    System.out.println("Всего преподавателей в файле (после фильтра): " + countFromFile);
+  }
 }

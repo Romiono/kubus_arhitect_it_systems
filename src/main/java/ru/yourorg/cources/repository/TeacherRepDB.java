@@ -59,12 +59,14 @@ public class TeacherRepDB extends TeacherRepository {
   @Override
   public void add(Teacher teacher) {
     String newId = generateNewId();
+    // CHECKSTYLE:OFF
     String query = """
             INSERT INTO teachers (
                 staff_number, last_name, first_name, patronymic, phone,
                 email, employment_start, experience_years, qualification, notes
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
+    // CHECKSTYLE:ON
 
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, newId);
@@ -129,6 +131,11 @@ public class TeacherRepDB extends TeacherRepository {
   @Override
   public int getCount() {
     return 0;
+  }
+
+  @Override
+  public List<Teacher> getAllTeachers() {
+    return List.of();
   }
 
   // ================= Вспомогательные методы ===================

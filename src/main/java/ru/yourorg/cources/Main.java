@@ -1,4 +1,4 @@
-package ru.yourorg.cources; // исправлено: courses, а не cources
+package ru.yourorg.cources;
 
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;

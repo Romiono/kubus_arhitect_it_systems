@@ -95,7 +95,27 @@ public class Teacher extends Person {
                 phone, email, employmentStart, experienceYears, qualification, notes);
     }
 
-    public String toStringFull() {
+  public String getStaffNumber() {
+    return staffNumber;
+  }
+
+  public LocalDate getEmploymentStart() {
+    return employmentStart;
+  }
+
+  public int getExperienceYears() {
+    return experienceYears;
+  }
+
+  public String getQualification() {
+    return qualification;
+  }
+
+  public String getNotes() {
+    return notes;
+  }
+
+  public String toStringFull() {
         return "Teacher{" +
                 "staffNumber='" + staffNumber + '\'' +
                 ", " + super.toString() +

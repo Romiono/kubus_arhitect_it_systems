@@ -29,6 +29,11 @@ public class TeacherRepDBAdapter extends TeacherRepository {
   }
 
   @Override
+  public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
+    return List.of();
+  }
+
+  @Override
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
     return dbRepo.get_k_n_short_list(k, n);
   }
@@ -51,6 +56,11 @@ public class TeacherRepDBAdapter extends TeacherRepository {
   @Override
   public boolean deleteById(String id) {
     return dbRepo.deleteById(id);
+  }
+
+  @Override
+  public int getCount(Filter filter) {
+    return 0;
   }
 
   @Override

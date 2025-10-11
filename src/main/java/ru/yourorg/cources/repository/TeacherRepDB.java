@@ -17,6 +17,16 @@ public class TeacherRepDB extends TeacherRepository {
   }
 
   @Override
+  public void readAll() {
+    throw new UnsupportedOperationException("Метод не реализован");
+  }
+
+  @Override
+  public void writeAll() {
+    throw new UnsupportedOperationException("Метод не реализован");
+  }
+
+  @Override
   public Teacher getById(String id) {
     String query = "SELECT * FROM teachers WHERE staff_number = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -32,20 +42,18 @@ public class TeacherRepDB extends TeacherRepository {
   }
 
   @Override
+  public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
+    return getFilteredSortedList(filter, sortOrder, k, n);
+  }
+
+  @Override
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
-    List<TeacherSummary> summaries = new ArrayList<>();
-    String query = "SELECT * FROM teachers ORDER BY staff_number LIMIT ? OFFSET ?";
-    try (PreparedStatement stmt = connection.prepareStatement(query)) {
-      stmt.setInt(1, k);
-      stmt.setInt(2, (n - 1) * k);
-      ResultSet rs = stmt.executeQuery();
-      while (rs.next()) {
-        summaries.add(TeacherSummary.fromTeacher(parseTeacher(rs)));
-      }
-    } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при получении краткого списка", e);
-    }
-    return summaries;
+    return List.of();
+  }
+
+  @Override
+  public void sortByExperienceYears() {
+    // Не нужно — сортировка задается в запросах
   }
 
   @Override
@@ -114,21 +122,16 @@ public class TeacherRepDB extends TeacherRepository {
   }
 
   @Override
-  public int getCount() {
-    String query = "SELECT COUNT(*) FROM teachers";
-    try (Statement stmt = connection.createStatement()) {
-      ResultSet rs = stmt.executeQuery(query);
-      if (rs.next()) return rs.getInt(1);
-    } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при подсчете преподавателей", e);
-    }
-    return 0;
+  public int getCount(Filter filter) {
+    return getFilteredCount(filter);
   }
 
   @Override
-  public void sortByExperienceYears() {
-    // Этот метод не нужен для DB, сортировка делается в SQL
+  public int getCount() {
+    return 0;
   }
+
+  // ================= Вспомогательные методы ===================
 
   private Teacher parseTeacher(ResultSet rs) throws SQLException {
     return Teacher.of(
@@ -159,7 +162,69 @@ public class TeacherRepDB extends TeacherRepository {
       return "T" + String.format("%03d", max + 1);
 
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при генерации ID", e);
+      throw new RuntimeException("Ошибка при генерации нового ID", e);
     }
+  }
+
+  public List<TeacherSummary> getFilteredSortedList(Filter filter, SortOrder sortOrder, int k, int n) {
+    List<TeacherSummary> summaries = new ArrayList<>();
+    StringBuilder query = new StringBuilder("SELECT * FROM teachers");
+
+    if (filter != null) {
+      query.append(" WHERE ").append(filter.toSQLWhereClause());
+    }
+
+    if (sortOrder != null) {
+      query.append(" ORDER BY ").append(sortOrder.getSqlOrder());
+    } else {
+      query.append(" ORDER BY staff_number");
+    }
+
+    query.append(" LIMIT ? OFFSET ?");
+
+    try (PreparedStatement stmt = connection.prepareStatement(query.toString())) {
+      int idx = 1;
+      if (filter != null) {
+        for (Object param : filter.getParameters()) {
+          stmt.setObject(idx++, param);
+        }
+      }
+      stmt.setInt(idx++, k);
+      stmt.setInt(idx, (n - 1) * k);
+
+      ResultSet rs = stmt.executeQuery();
+      while (rs.next()) {
+        summaries.add(TeacherSummary.fromTeacher(parseTeacher(rs)));
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException("Ошибка при получении списка с фильтром и сортировкой", e);
+    }
+
+    return summaries;
+  }
+
+  public int getFilteredCount(Filter filter) {
+    StringBuilder query = new StringBuilder("SELECT COUNT(*) FROM teachers");
+
+    if (filter != null) {
+      query.append(" WHERE ").append(filter.toSQLWhereClause());
+    }
+
+    try (PreparedStatement stmt = connection.prepareStatement(query.toString())) {
+      if (filter != null) {
+        int idx = 1;
+        for (Object param : filter.getParameters()) {
+          stmt.setObject(idx++, param);
+        }
+      }
+      ResultSet rs = stmt.executeQuery();
+      if (rs.next()) {
+        return rs.getInt(1);
+      }
+    } catch (SQLException e) {
+      throw new RuntimeException("Ошибка при подсчете количества с фильтром", e);
+    }
+
+    return 0;
   }
 }

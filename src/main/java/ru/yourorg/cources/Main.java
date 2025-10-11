@@ -2,8 +2,10 @@ package ru.yourorg.cources;
 
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
+import ru.yourorg.cources.repository.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -74,5 +76,15 @@ public class Main {
 
         TeacherSummary summaryCsv = TeacherSummary.fromTeacher(t3);
         System.out.println(summaryCsv);
+
+      TeacherRepository baseRepo = new TeacherRepDB();
+      TeacherRepository repo = new TeacherRepositoryDecorator(baseRepo);
+
+      Filter filter = new QualificationFilter("PhD");
+      SortOrder sortOrder = SortOrder.BY_EXPERIENCE_DESC;
+
+      List<TeacherSummary> list = repo.get_k_n_short_list(filter, sortOrder, 10, 1);
+      int count = repo.getCount(filter);
+
     }
 }

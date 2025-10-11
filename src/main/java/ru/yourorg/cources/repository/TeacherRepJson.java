@@ -51,6 +51,11 @@ public class TeacherRepJson extends TeacherRepository {
       .orElse(null);
   }
 
+  @Override
+  public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
+    return List.of();
+  }
+
   // d. Получить список k по счету n объектов краткой версии
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
     return teachers.stream()
@@ -125,8 +130,19 @@ public class TeacherRepJson extends TeacherRepository {
     return removed;
   }
 
+  @Override
+  public int getCount(Filter filter) {
+    return 0;
+  }
+
   // i. Получить количество элементов
   public int getCount() {
     return teachers.size();
   }
+
+  @Override
+  public List<Teacher> getAllTeachers() {
+    return new ArrayList<>(teachers); // можно вернуть ImmutableList если хочешь защиту от изменений
+  }
+
 }

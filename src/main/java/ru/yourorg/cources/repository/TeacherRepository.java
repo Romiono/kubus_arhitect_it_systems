@@ -25,4 +25,6 @@ public abstract class TeacherRepository {
   public abstract int getCount(Filter filter); // i
 
   public abstract int getCount();
+
+  public abstract List<Teacher> getAllTeachers();
 }

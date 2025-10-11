@@ -67,4 +67,9 @@ public class TeacherRepDBAdapter extends TeacherRepository {
   public int getCount() {
     return dbRepo.getCount();
   }
+
+  @Override
+  public List<Teacher> getAllTeachers() {
+    return List.of();
+  }
 }

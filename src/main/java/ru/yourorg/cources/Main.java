@@ -3,8 +3,12 @@ package ru.yourorg.cources;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
 import ru.yourorg.cources.repository.*;
+import ru.yourorg.cources.repository.decorators.TeacherFilter;
+import ru.yourorg.cources.repository.decorators.TeacherRepJsonFilteredSortedDecorator;
+import ru.yourorg.cources.repository.decorators.TeacherSorter;
 
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main {
@@ -85,6 +89,17 @@ public class Main {
 
       List<TeacherSummary> list = repo.get_k_n_short_list(filter, sortOrder, 10, 1);
       int count = repo.getCount(filter);
+
+      TeacherRepository jsonRepo = new TeacherRepJson("teachers.json");
+
+      TeacherFilter teacherFilter = teacher -> teacher.getExperienceYears() >= 5;
+      TeacherSorter sorter = () -> Comparator.comparing(Teacher::getLastName);
+
+      TeacherRepository filteredSortedRepo = new TeacherRepJsonFilteredSortedDecorator(jsonRepo, teacherFilter, sorter);
+
+      List<TeacherSummary> page = filteredSortedRepo.get_k_n_short_list(10, 1);
+
+      // int count = filteredSortedRepo.getCount();
 
     }
 }

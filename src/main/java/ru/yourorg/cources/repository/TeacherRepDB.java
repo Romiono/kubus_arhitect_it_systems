@@ -1,5 +1,6 @@
 package ru.yourorg.cources.repository;
 
+import ru.yourorg.cources.db.DBManager;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
 
@@ -8,80 +9,57 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherRepDB extends TeacherRepository {
+public class TeacherRepDB {
 
-  private final String url;
-  private final String user;
-  private final String password;
+  private final Connection connection;
 
-  public TeacherRepDB(String url, String user, String password) {
-    this.url = url;
-    this.user = user;
-    this.password = password;
-  }
-
-  private Connection getConnection() throws SQLException {
-    return DriverManager.getConnection(url, user, password);
+  public TeacherRepDB() {
+    this.connection = DBManager.getInstance().getConnection();
   }
 
   // a. Получить объект по ID
-  @Override
   public Teacher getById(String id) {
-    String sql = "SELECT * FROM courses.teachers WHERE staff_number = ?";
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+    String query = "SELECT * FROM teachers WHERE staff_number = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, id);
       ResultSet rs = stmt.executeQuery();
       if (rs.next()) {
-        return extractTeacher(rs);
+        return parseTeacher(rs);
       }
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при получении преподавателя: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при получении преподавателя по ID", e);
     }
     return null;
   }
 
-  // b. Получить список k по счету n кратко
-  @Override
+  // b. Получить список k по счету n объектов (краткие данные)
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
-    String sql = """
-            SELECT * FROM courses.teachers
-            ORDER BY experience_years DESC
-            OFFSET ? LIMIT ?
-        """;
-    List<TeacherSummary> list = new ArrayList<>();
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-      stmt.setInt(1, (n - 1) * k);
-      stmt.setInt(2, k);
+    List<TeacherSummary> summaries = new ArrayList<>();
+    String query = "SELECT * FROM teachers ORDER BY staff_number LIMIT ? OFFSET ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
+      stmt.setInt(1, k);
+      stmt.setInt(2, (n - 1) * k);
       ResultSet rs = stmt.executeQuery();
       while (rs.next()) {
-        list.add(TeacherSummary.fromTeacher(extractTeacher(rs)));
+        summaries.add(TeacherSummary.fromTeacher(parseTeacher(rs)));
       }
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при получении списка: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при получении краткого списка преподавателей", e);
     }
-    return list;
+    return summaries;
   }
 
-  @Override
-  public void sortByExperienceYears() {
-    throw new UnsupportedOperationException("Сортировка выполняется в запросе к БД через get_k_n_short_list");
-  }
-
-
-  // c. Добавить объект в список (сформировать ID)
-  @Override
+  // c. Добавить объект в список (генерация нового ID)
   public void add(Teacher teacher) {
     String newId = generateNewId();
-    String sql = """
-            INSERT INTO courses.teachers (
+    String query = """
+            INSERT INTO teachers (
                 staff_number, last_name, first_name, patronymic, phone,
                 email, employment_start, experience_years, qualification, notes
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """;
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+            """;
+
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, newId);
       stmt.setString(2, teacher.getLastName());
       stmt.setString(3, teacher.getFirstName());
@@ -94,37 +72,21 @@ public class TeacherRepDB extends TeacherRepository {
       stmt.setString(10, teacher.getNotes());
       stmt.executeUpdate();
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при добавлении преподавателя: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при добавлении преподавателя", e);
     }
   }
 
-  private String generateNewId() {
-    String sql = "SELECT MAX(staff_number) FROM courses.teachers WHERE staff_number ~ '^T\\\\d{3}$'";
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql);
-         ResultSet rs = stmt.executeQuery()) {
-      if (rs.next()) {
-        String maxId = rs.getString(1);
-        int num = (maxId != null) ? Integer.parseInt(maxId.substring(1)) : 0;
-        return "T" + String.format("%03d", num + 1);
-      }
-    } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при генерации ID: " + e.getMessage(), e);
-    }
-    return "T001";
-  }
-
-  // d. Заменить элемент по ID
-  @Override
+  // d. Заменить элемент списка по ID
   public boolean updateById(String id, Teacher updated) {
-    String sql = """
-            UPDATE courses.teachers SET
-                last_name=?, first_name=?, patronymic=?, phone=?, email=?,
-                employment_start=?, experience_years=?, qualification=?, notes=?
-            WHERE staff_number=?
-        """;
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+    String query = """
+            UPDATE teachers SET
+                last_name = ?, first_name = ?, patronymic = ?, phone = ?,
+                email = ?, employment_start = ?, experience_years = ?,
+                qualification = ?, notes = ?
+            WHERE staff_number = ?
+            """;
+
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, updated.getLastName());
       stmt.setString(2, updated.getFirstName());
       stmt.setString(3, updated.getPatronymic());
@@ -137,39 +99,36 @@ public class TeacherRepDB extends TeacherRepository {
       stmt.setString(10, id);
       return stmt.executeUpdate() > 0;
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при обновлении: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при обновлении преподавателя", e);
     }
   }
 
-  // e. Удалить по ID
-  @Override
+  // e. Удалить элемент по ID
   public boolean deleteById(String id) {
-    String sql = "DELETE FROM courses.teachers WHERE staff_number=?";
-    try (Connection conn = getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
+    String query = "DELETE FROM teachers WHERE staff_number = ?";
+    try (PreparedStatement stmt = connection.prepareStatement(query)) {
       stmt.setString(1, id);
       return stmt.executeUpdate() > 0;
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при удалении: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при удалении преподавателя", e);
     }
   }
 
-  // f. Получить количество
-  @Override
+  // f. Получить количество элементов
   public int getCount() {
-    String sql = "SELECT COUNT(*) FROM courses.teachers";
-    try (Connection conn = getConnection();
-         Statement stmt = conn.createStatement();
-         ResultSet rs = stmt.executeQuery(sql)) {
+    String query = "SELECT COUNT(*) FROM teachers";
+    try (Statement stmt = connection.createStatement()) {
+      ResultSet rs = stmt.executeQuery(query);
       if (rs.next()) return rs.getInt(1);
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при подсчёте записей: " + e.getMessage(), e);
+      throw new RuntimeException("Ошибка при подсчете количества преподавателей", e);
     }
     return 0;
   }
 
-  // 🔧 Приватный метод для сбора объекта из ResultSet
-  private Teacher extractTeacher(ResultSet rs) throws SQLException {
+  // ====================== Вспомогательные =======================
+
+  private Teacher parseTeacher(ResultSet rs) throws SQLException {
     return Teacher.of(
       rs.getString("staff_number"),
       rs.getString("last_name"),
@@ -184,13 +143,27 @@ public class TeacherRepDB extends TeacherRepository {
     );
   }
 
-  @Override
-  public void readAll() {
-    throw new UnsupportedOperationException("Не используется в БД");
+  private String generateNewId() {
+    String query = "SELECT staff_number FROM teachers WHERE staff_number ~ '^T\\d+$'";
+    try (Statement stmt = connection.createStatement();
+         ResultSet rs = stmt.executeQuery(query)) {
+
+      int max = 0;
+      while (rs.next()) {
+        String id = rs.getString(1);
+        int num = Integer.parseInt(id.substring(1));
+        if (num > max) max = num;
+      }
+      return "T" + String.format("%03d", max + 1);
+
+    } catch (SQLException e) {
+      throw new RuntimeException("Ошибка при генерации нового ID", e);
+    }
   }
 
-  @Override
-  public void writeAll() {
-    throw new UnsupportedOperationException("Не используется в БД");
+  // g. Сортировка по стажу
+  public void sortByExperienceYears() {
+    // Не нужен в DB-классе напрямую, так как сортировка применяется в запросах (например, ORDER BY experience_years)
+    // Метод оставляем пустым для совместимости с иерархией
   }
 }

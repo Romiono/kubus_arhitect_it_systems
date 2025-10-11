@@ -225,6 +225,27 @@ public class Validators {
 
 ```
 
+## Лаба 2
 
-
+             +------------------------+
+             |   TeacherRepository    |  (abstract)
+             +------------------------+
+             | +readAll()             |
+             | +writeAll()            |
+             | +getById(id)           |
+             | +get_k_n_short_list(k,n)|
+             | +sortByExperienceYears()|
+             | +add(teacher)          |
+             | +updateById(id, t)     |
+             | +deleteById(id)        |
+             | +getCount()            |
+             +------------------------+
+                ▲                 ▲
+                |                 |
++----------------------+   +----------------------+
+|   TeacherRepJson     |   |   TeacherRepYaml     |
++----------------------+   +----------------------+
+| +file                |   | +file                |
+| +teachers            |   | +teachers            |
++----------------------+   +----------------------+
 

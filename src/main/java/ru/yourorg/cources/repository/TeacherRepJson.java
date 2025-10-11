@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TeacherRepJson {
+public class TeacherRepJson extends TeacherRepository {
 
   private final File file;
   private final ObjectMapper objectMapper = new ObjectMapper();

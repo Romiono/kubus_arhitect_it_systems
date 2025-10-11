@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class TeacherRepYaml {
+public class TeacherRepYaml extends TeacherRepository {
 
   private final File file;
   private final ObjectMapper yamlMapper;

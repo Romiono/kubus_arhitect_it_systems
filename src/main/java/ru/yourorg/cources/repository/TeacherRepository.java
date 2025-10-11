@@ -7,13 +7,19 @@ import java.util.List;
 
 public abstract class TeacherRepository {
 
-  public abstract void readAll(); // a
-  public abstract void writeAll(); // b
-  public abstract Teacher getById(String id); // c
-  public abstract List<TeacherSummary> get_k_n_short_list(int k, int n); // d
-  public abstract void sortByExperienceYears(); // e
-  public abstract void add(Teacher teacher); // f
-  public abstract boolean updateById(String id, Teacher updated); // g
-  public abstract boolean deleteById(String id); // h
-  public abstract int getCount(); // i
+  public void readAll() {
+    // по умолчанию ничего не делает (для БД)
+  }
+
+  public void writeAll() {
+    // по умолчанию ничего не делает (для БД)
+  }
+
+  public abstract Teacher getById(String id);
+  public abstract List<TeacherSummary> get_k_n_short_list(int k, int n);
+  public abstract void sortByExperienceYears();
+  public abstract void add(Teacher teacher);
+  public abstract boolean updateById(String id, Teacher updated);
+  public abstract boolean deleteById(String id);
+  public abstract int getCount();
 }

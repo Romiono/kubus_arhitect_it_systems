@@ -5,11 +5,10 @@ import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TeacherRepDB {
+public class TeacherRepDB extends TeacherRepository {
 
   private final Connection connection;
 
@@ -17,7 +16,7 @@ public class TeacherRepDB {
     this.connection = DBManager.getInstance().getConnection();
   }
 
-  // a. Получить объект по ID
+  @Override
   public Teacher getById(String id) {
     String query = "SELECT * FROM teachers WHERE staff_number = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -32,7 +31,7 @@ public class TeacherRepDB {
     return null;
   }
 
-  // b. Получить список k по счету n объектов (краткие данные)
+  @Override
   public List<TeacherSummary> get_k_n_short_list(int k, int n) {
     List<TeacherSummary> summaries = new ArrayList<>();
     String query = "SELECT * FROM teachers ORDER BY staff_number LIMIT ? OFFSET ?";
@@ -44,12 +43,12 @@ public class TeacherRepDB {
         summaries.add(TeacherSummary.fromTeacher(parseTeacher(rs)));
       }
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при получении краткого списка преподавателей", e);
+      throw new RuntimeException("Ошибка при получении краткого списка", e);
     }
     return summaries;
   }
 
-  // c. Добавить объект в список (генерация нового ID)
+  @Override
   public void add(Teacher teacher) {
     String newId = generateNewId();
     String query = """
@@ -76,7 +75,7 @@ public class TeacherRepDB {
     }
   }
 
-  // d. Заменить элемент списка по ID
+  @Override
   public boolean updateById(String id, Teacher updated) {
     String query = """
             UPDATE teachers SET
@@ -103,7 +102,7 @@ public class TeacherRepDB {
     }
   }
 
-  // e. Удалить элемент по ID
+  @Override
   public boolean deleteById(String id) {
     String query = "DELETE FROM teachers WHERE staff_number = ?";
     try (PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -114,19 +113,22 @@ public class TeacherRepDB {
     }
   }
 
-  // f. Получить количество элементов
+  @Override
   public int getCount() {
     String query = "SELECT COUNT(*) FROM teachers";
     try (Statement stmt = connection.createStatement()) {
       ResultSet rs = stmt.executeQuery(query);
       if (rs.next()) return rs.getInt(1);
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при подсчете количества преподавателей", e);
+      throw new RuntimeException("Ошибка при подсчете преподавателей", e);
     }
     return 0;
   }
 
-  // ====================== Вспомогательные =======================
+  @Override
+  public void sortByExperienceYears() {
+    // Этот метод не нужен для DB, сортировка делается в SQL
+  }
 
   private Teacher parseTeacher(ResultSet rs) throws SQLException {
     return Teacher.of(
@@ -157,13 +159,7 @@ public class TeacherRepDB {
       return "T" + String.format("%03d", max + 1);
 
     } catch (SQLException e) {
-      throw new RuntimeException("Ошибка при генерации нового ID", e);
+      throw new RuntimeException("Ошибка при генерации ID", e);
     }
-  }
-
-  // g. Сортировка по стажу
-  public void sortByExperienceYears() {
-    // Не нужен в DB-классе напрямую, так как сортировка применяется в запросах (например, ORDER BY experience_years)
-    // Метод оставляем пустым для совместимости с иерархией
   }
 }

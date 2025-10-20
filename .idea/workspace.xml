@@ -4,21 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="лаба 2 - пункт 8">
-      <change afterPath="$PROJECT_DIR$/google_checks.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/util/JacksonObjectMapperProvider.java" afterDir="false" />
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="лаба 2 - пункт 9 + фиксы">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/model/Teacher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/Filter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/Filter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/QualificationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/QualificationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/SortOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/SortOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDBAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDBAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepJson.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepYaml.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepYaml.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepositoryDecorator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepositoryDecorator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teachers.json" beforeDir="false" afterPath="$PROJECT_DIR$/teachers.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,12 +41,12 @@
     &quot;assignee&quot;: &quot;Romiono&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Romiono/kubus_arhitect_it_systems.git",
-    "accountId": "b1f3719f-761e-451c-ade5-1909dd6b12b1"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Romiono/kubus_arhitect_it_systems.git&quot;,
+    &quot;accountId&quot;: &quot;b1f3719f-761e-451c-ade5-1909dd6b12b1&quot;
   }
-}]]></component>
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -119,7 +114,8 @@
       <workItem from="1760158854737" duration="70000" />
       <workItem from="1760158932057" duration="2283000" />
       <workItem from="1760179900775" duration="18000" />
-      <workItem from="1760183362868" duration="15744000" />
+      <workItem from="1760183362868" duration="17312000" />
+      <workItem from="1760981854049" duration="800000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -289,7 +285,23 @@
       <option name="project" value="LOCAL" />
       <updated>1760210853641</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="лаба 2 - пункт 9 + фиксы">
+      <option name="closed" value="true" />
+      <created>1760213943691</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1760213943691</updated>
+    </task>
+    <task id="LOCAL-00023" summary="лаба 2 - пункт 9 + фиксы">
+      <option name="closed" value="true" />
+      <created>1760213952979</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1760213952979</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,6 +340,7 @@
     <MESSAGE value="лаба 2 - пункт 6" />
     <MESSAGE value="лаба 2 - пункт 7" />
     <MESSAGE value="лаба 2 - пункт 8" />
-    <option name="LAST_COMMIT_MESSAGE" value="лаба 2 - пункт 8" />
+    <MESSAGE value="лаба 2 - пункт 9 + фиксы" />
+    <option name="LAST_COMMIT_MESSAGE" value="лаба 2 - пункт 9 + фиксы" />
   </component>
 </project>

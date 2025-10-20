@@ -1,12 +1,14 @@
 package ru.yourorg.cources.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import ru.yourorg.cources.util.Validators;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Teacher extends Person {
 
   private final String staffNumber;

@@ -24,6 +24,9 @@ public class QualificationFilter implements Filter {
 
   @Override
   public boolean apply(Teacher teacher) {
-    return false;
+    if (teacher.getQualification() == null) {
+      return qualification == null;
+    }
+    return teacher.getQualification().equals(qualification);
   }
 }

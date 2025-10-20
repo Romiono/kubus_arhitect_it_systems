@@ -30,7 +30,7 @@ public class TeacherRepDBAdapter extends TeacherRepository {
 
   @Override
   public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
-    return List.of();
+    return dbRepo.get_k_n_short_list(filter, sortOrder, k, n);
   }
 
   @Override
@@ -60,7 +60,7 @@ public class TeacherRepDBAdapter extends TeacherRepository {
 
   @Override
   public int getCount(Filter filter) {
-    return 0;
+    return dbRepo.getCount(filter);
   }
 
   @Override

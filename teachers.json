@@ -8,8 +8,7 @@
   "employmentStart" : "2010-09-01",
   "experienceYears" : 14,
   "qualification" : "Профессор",
-  "notes" : "Эксперт по Java",
-  "shortName" : "Иванов А."
+  "notes" : "Эксперт по Java"
 }, {
   "staffNumber" : "T002",
   "lastName" : "Сидорова",
@@ -20,8 +19,7 @@
   "employmentStart" : "2015-01-01",
   "experienceYears" : 9,
   "qualification" : "Доцент",
-  "notes" : "Специалист по UX",
-  "shortName" : "Сидорова М."
+  "notes" : "Специалист по UX"
 }, {
   "staffNumber" : "T003",
   "lastName" : "Сидорова",
@@ -32,8 +30,7 @@
   "employmentStart" : "2015-01-01",
   "experienceYears" : 9,
   "qualification" : "Доцент",
-  "notes" : "Специалист по UX",
-  "shortName" : "Сидорова М."
+  "notes" : "Специалист по UX"
 }, {
   "staffNumber" : "T004",
   "lastName" : "Кузнецов",
@@ -44,6 +41,5 @@
   "employmentStart" : "2018-02-14",
   "experienceYears" : 6,
   "qualification" : "Преподаватель",
-  "notes" : "Фронтенд",
-  "shortName" : "Кузнецов Д."
+  "notes" : "Фронтенд"
 } ]

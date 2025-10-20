@@ -18,7 +18,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.15.2</version>
+            <version>2.17.0</version>
         </dependency>
 
       <dependency>
@@ -36,7 +36,7 @@
       <dependency>
         <groupId>com.fasterxml.jackson.datatype</groupId>
         <artifactId>jackson-datatype-jsr310</artifactId>
-        <version>2.17.0</version> <!-- или другую версию, соответствующую твоему jackson-core -->
+        <version>2.17.0</version>
       </dependency>
     </dependencies>
 
@@ -74,11 +74,17 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
         <version>3.1.2</version>
+        <configuration>
+          <configLocation>google_checks.xml</configLocation>
+          <consoleOutput>true</consoleOutput>
+          <failsOnError>true</failsOnError>
+          <linkXRef>false</linkXRef>
+        </configuration>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>9.3</version> <!-- версия должна быть >= 8.24 -->
+            <version>9.3</version>
           </dependency>
         </dependencies>
       </plugin>

@@ -2,7 +2,9 @@ package ru.yourorg.cources.repository;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
 
@@ -20,13 +22,15 @@ public class TeacherRepYaml extends TeacherRepository {
   public TeacherRepYaml(String filePath) {
     this.file = new File(filePath);
     this.yamlMapper = new ObjectMapper(new YAMLFactory());
+    this.yamlMapper.registerModule(new JavaTimeModule());
+    this.yamlMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
     readAll();
   }
 
   // a. Чтение всех значений из файла
   public void readAll() {
     try {
-      if (file.exists()) {
+      if (file.exists() && file.length() > 0) {
         teachers = yamlMapper.readValue(file, new TypeReference<>() {});
       } else {
         teachers = new ArrayList<>();
@@ -55,7 +59,24 @@ public class TeacherRepYaml extends TeacherRepository {
 
   @Override
   public List<TeacherSummary> get_k_n_short_list(Filter filter, SortOrder sortOrder, int k, int n) {
-    return List.of();
+    var stream = teachers.stream();
+
+    // Применяем фильтр
+    if (filter != null) {
+      stream = stream.filter(filter::apply);
+    }
+
+    // Применяем сортировку
+    if (sortOrder != null) {
+      stream = stream.sorted(sortOrder.getComparator());
+    }
+
+    // Применяем пагинацию
+    return stream
+      .skip((long) (n - 1) * k)
+      .limit(k)
+      .map(TeacherSummary::fromTeacher)
+      .collect(Collectors.toList());
   }
 
   // d. Получить список k по счету n объектов краткой версии
@@ -134,7 +155,12 @@ public class TeacherRepYaml extends TeacherRepository {
 
   @Override
   public int getCount(Filter filter) {
-    return 0;
+    if (filter == null) {
+      return teachers.size();
+    }
+    return (int) teachers.stream()
+      .filter(filter::apply)
+      .count();
   }
 
   // i. Количество элементов
@@ -144,6 +170,6 @@ public class TeacherRepYaml extends TeacherRepository {
 
   @Override
   public List<Teacher> getAllTeachers() {
-    return List.of();
+    return new ArrayList<>(teachers);
   }
 }

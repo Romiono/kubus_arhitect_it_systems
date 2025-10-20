@@ -32,7 +32,7 @@ public class TeacherRepJson extends TeacherRepository {
   // a. Чтение всех значений из файла
   public void readAll() {
     try {
-      if (file.exists()) {
+      if (file.exists() && file.length() > 0) {
         teachers = objectMapper.readValue(file, new TypeReference<>() {});
       } else {
         teachers = new ArrayList<>();

@@ -238,4 +238,52 @@
   "qualification" : "Профессор",
   "notes" : "Специалист по алгоритмам",
   "shortName" : "Петрова Е."
+}, {
+  "staffNumber" : "T021",
+  "lastName" : "Иванов",
+  "firstName" : "Алексей",
+  "patronymic" : "Петрович",
+  "phone" : "+79160000001",
+  "email" : "ivanov@example.com",
+  "employmentStart" : "2010-09-01",
+  "experienceYears" : 14,
+  "qualification" : "Профессор",
+  "notes" : "Эксперт по Java",
+  "shortName" : "Иванов А."
+}, {
+  "staffNumber" : "T022",
+  "lastName" : "Сидорова",
+  "firstName" : "Марина",
+  "patronymic" : "Владимировна",
+  "phone" : "+79160000002",
+  "email" : "msidorova@example.com",
+  "employmentStart" : "2015-01-01",
+  "experienceYears" : 9,
+  "qualification" : "Доцент",
+  "notes" : "Специалист по UX",
+  "shortName" : "Сидорова М."
+}, {
+  "staffNumber" : "T023",
+  "lastName" : "Кузнецов",
+  "firstName" : "Дмитрий",
+  "patronymic" : "Игоревич",
+  "phone" : "+79160000003",
+  "email" : "d.kuznecov@example.com",
+  "employmentStart" : "2018-02-14",
+  "experienceYears" : 6,
+  "qualification" : "Преподаватель",
+  "notes" : "Фронтенд разработчик",
+  "shortName" : "Кузнецов Д."
+}, {
+  "staffNumber" : "T024",
+  "lastName" : "Петрова",
+  "firstName" : "Елена",
+  "patronymic" : "Сергеевна",
+  "phone" : "+79160000004",
+  "email" : "e.petrova@example.com",
+  "employmentStart" : "2012-05-20",
+  "experienceYears" : 12,
+  "qualification" : "Профессор",
+  "notes" : "Специалист по алгоритмам",
+  "shortName" : "Петрова Е."
 } ]

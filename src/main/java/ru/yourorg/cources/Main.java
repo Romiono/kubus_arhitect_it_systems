@@ -7,7 +7,7 @@ import ru.yourorg.cources.repository.Filter;
 import ru.yourorg.cources.repository.SortOrder;
 import ru.yourorg.cources.repository.TeacherRepository;
 import ru.yourorg.cources.repository.TeacherRepDB;
-import ru.yourorg.cources.repository.TeacherRepDBAdapter;
+import ru.yourorg.cources.repository.adapters.TeacherRepDBAdapter;
 import ru.yourorg.cources.repository.QualificationFilter;
 import ru.yourorg.cources.repository.TeacherRepJson;
 import ru.yourorg.cources.repository.TeacherRepYaml;

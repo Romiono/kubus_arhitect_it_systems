@@ -1,7 +1,11 @@
-package ru.yourorg.cources.repository;
+package ru.yourorg.cources.repository.adapters;
 
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
+import ru.yourorg.cources.repository.Filter;
+import ru.yourorg.cources.repository.SortOrder;
+import ru.yourorg.cources.repository.TeacherRepDB;
+import ru.yourorg.cources.repository.TeacherRepository;
 
 import java.util.List;
 

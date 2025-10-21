@@ -1,4 +1,4 @@
-package ru.yourorg.cources.util;
+package ru.yourorg.cources.util.serializers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -10,10 +10,7 @@ public class JacksonObjectMapperProvider {
 
   static {
     mapper = new ObjectMapper();
-    // Добавляем модуль для поддержки Java 8 time API (LocalDate, LocalDateTime и т.п.)
     mapper.registerModule(new JavaTimeModule());
-
-    // Отключаем запись дат как timestamps (иначе будут числа вместо "yyyy-MM-dd")
     mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
   }
 

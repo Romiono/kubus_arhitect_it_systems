@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ru.yourorg.cources.model.Teacher;
 import ru.yourorg.cources.model.TeacherSummary;
-import ru.yourorg.cources.util.JacksonObjectMapperProvider;
+import ru.yourorg.cources.util.serializers.JacksonObjectMapperProvider;
 
 import java.io.File;
 import java.io.IOException;

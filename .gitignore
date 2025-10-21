@@ -1,1 +1,9 @@
 target/
+
+# Environment variables (sensitive data)
+.env
+
+# Test data files
+teachers_test.json
+teachers_test.yaml
+teachers_decorator_test.json

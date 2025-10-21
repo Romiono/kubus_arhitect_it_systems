@@ -15,6 +15,7 @@ import ru.yourorg.cources.repository.decorators.TeacherFilter;
 import ru.yourorg.cources.repository.decorators.TeacherRepJsonFilteredSortedDecorator;
 import ru.yourorg.cources.repository.decorators.TeacherSorter;
 import ru.yourorg.cources.db.DBManager;
+import ru.yourorg.cources.util.EnvConfig;
 
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -54,7 +55,7 @@ public class Main {
     );
 
     // ПУНКТ 1: TeacherRepJson - работа с JSON файлом
-    TeacherRepository jsonRepo = new TeacherRepJson("teachers_test.json");
+    TeacherRepository jsonRepo = new TeacherRepJson(EnvConfig.getJsonFile());
     jsonRepo.readAll();  // a. Чтение всех значений из файла
     // b. Запись всех значений в файл (автоматически при изменениях)
     jsonRepo.add(teacher1);  // f. Добавить объект
@@ -75,7 +76,7 @@ public class Main {
     System.out.println("Пункт 1: TeacherRepJson (9 методов: a-i) - Ok");
 
     // ПУНКТ 2: TeacherRepYaml - работа с YAML файлом
-    TeacherRepository yamlRepo = new TeacherRepYaml("teachers_test.yaml");
+    TeacherRepository yamlRepo = new TeacherRepYaml(EnvConfig.getYamlFile());
     yamlRepo.readAll();  // a. Чтение всех значений из файла
     // b. Запись всех значений в файл (автоматически при изменениях)
     yamlRepo.add(teacher1);  // f. Добавить объект
@@ -154,7 +155,7 @@ public class Main {
     }
 
     // ПУНКТ 8: Decorator для фильтрации и сортировки файлов
-    TeacherRepository jsonRepo8 = new TeacherRepJson("teachers_decorator_test.json");
+    TeacherRepository jsonRepo8 = new TeacherRepJson(EnvConfig.getDecoratorJsonFile());
     jsonRepo8.add(teacher1);
     jsonRepo8.add(teacher2);
     jsonRepo8.add(teacher3);

@@ -1,5 +1,7 @@
 package ru.yourorg.cources.db;
 
+import ru.yourorg.cources.util.EnvConfig;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -8,13 +10,12 @@ public class DBManager {
   private static DBManager instance;
   private Connection connection;
 
-  private static final String URL = "jdbc:postgresql://localhost:5432/OOP";
-  private static final String USER = "romashka";
-  private static final String PASSWORD = "1234"; // замени на свой пароль
-
   private DBManager() {
     try {
-      connection = DriverManager.getConnection(URL, USER, PASSWORD);
+      String url = EnvConfig.getDbUrl();
+      String user = EnvConfig.getDbUser();
+      String password = EnvConfig.getDbPassword();
+      connection = DriverManager.getConnection(url, user, password);
     } catch (SQLException e) {
       throw new RuntimeException("Ошибка подключения к базе данных", e);
     }

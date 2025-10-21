@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="лаба 2 - фиксы, тесты">
+    <list default="true" id="798eaef3-46a5-47de-b35e-2e08304a22b0" name="Changes" comment="лаба 2 - обновлена структура приложения">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepDBAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/repository/TeacherRepositoryDecorator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/yourorg/cources/db/DBManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teachers_decorator_test.json" beforeDir="false" afterPath="$PROJECT_DIR$/teachers_decorator_test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teachers_test.json" beforeDir="false" afterPath="$PROJECT_DIR$/teachers_test.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/teachers_test.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/teachers_test.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,10 @@
     &quot;accountId&quot;: &quot;b1f3719f-761e-451c-ade5-1909dd6b12b1&quot;
   }
 }</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -111,7 +120,7 @@
       <workItem from="1760183362868" duration="17312000" />
       <workItem from="1760981854049" duration="1021000" />
       <workItem from="1761030788569" duration="604000" />
-      <workItem from="1761045095446" duration="1133000" />
+      <workItem from="1761045095446" duration="3889000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -305,7 +314,15 @@
       <option name="project" value="LOCAL" />
       <updated>1760982848680</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="лаба 2 - обновлена структура приложения">
+      <option name="closed" value="true" />
+      <created>1761046327061</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1761046327061</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,6 +363,7 @@
     <MESSAGE value="лаба 2 - пункт 8" />
     <MESSAGE value="лаба 2 - пункт 9 + фиксы" />
     <MESSAGE value="лаба 2 - фиксы, тесты" />
-    <option name="LAST_COMMIT_MESSAGE" value="лаба 2 - фиксы, тесты" />
+    <MESSAGE value="лаба 2 - обновлена структура приложения" />
+    <option name="LAST_COMMIT_MESSAGE" value="лаба 2 - обновлена структура приложения" />
   </component>
 </project>
